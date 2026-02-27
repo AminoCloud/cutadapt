@@ -1,0 +1,27 @@
+apiVersion: aminocloud.io/v1
+kind: PipelineOperator
+metadata:
+  name: Cutadapt
+  description: "Finds and removes adapter sequences, primers, poly-A tails, and other unwanted sequences from high-throughput sequencing reads."
+  version: "4.6"
+  author: Marcel Martin
+  category: preprocessing
+  instrumentModes: [illumina, ion_torrent]
+  tags: [adapter, trim, preprocessing]
+inputs:
+  - id: fastq_in
+    name: Raw FASTQ
+    dataType: FASTQ
+    required: true
+outputs:
+  - id: fastq_out
+    name: Trimmed FASTQ
+    dataType: FASTQ
+compute:
+  cpu: 2
+  memoryGb: 4
+  gpuRequired: false
+  estimatedMinutes: 15
+docker:
+  image: acr.aminocloud.io/aminocloud/cutadapt
+  tag: "4.6"
